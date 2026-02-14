@@ -1,66 +1,33 @@
-# 🎓 Student Result Prediction AI
+# 🎓 Student Result Prediction System (ML + Streamlit)
 
-A modern **Streamlit-based AI application** that predicts:
-- ✅ Student **Pass / Fail probability**
-- 📊 **Estimated marks (out of 100)**
+A Machine Learning based web application that predicts student exam marks using study hours, attendance, internal marks, and assignment score.
 
-The system uses a **Hybrid Machine Learning Model**
-- Logistic Regression (Pass/Fail)
-- Linear Regression (Marks Prediction)
+The system compares multiple ML models, selects the best-performing algorithm automatically, and also shows a hybrid ensemble prediction.
 
 ---
 
 ## 🚀 Features
 
-- Clean & modern UI (Custom CSS)
-- Real-time prediction
-- AI-based recommendations
-- Interactive visualization
-- Confetti animation on PASS 🎉
+✔ Predict student marks using trained ML models  
+✔ Compare multiple algorithms  
+✔ Automatically detect BEST performing model  
+✔ Hybrid Ensemble Prediction (Top models average)  
+✔ Attendance-based personalized feedback  
+✔ Interactive Streamlit dashboard UI  
+✔ Graph comparison of model outputs  
 
 ---
 
-## 🧠 ML Models Used
+## 🧠 Machine Learning Models Used
 
-- Logistic Regression
-- Linear Regression
-- StandardScaler (Feature Scaling)
+- Linear Regression  
+- Random Forest  
+- Support Vector Regressor  
+- Other trained models (stored in models.pkl)
 
----
-
-## 🛠️ Tech Stack
-
-- Python 3.9+
-- Streamlit
-- Scikit-learn
-- Pandas
-- NumPy
-- Matplotlib
+Best model is automatically selected based on highest accuracy.
 
 ---
 
 ## 📂 Project Structure
-
-Chigo
-│
-├── .idea
-│
-├── app
-│   └── app.py
-│
-├── Dataset
-│   └── student_data.csv
-│
-├── model
-│   ├── hybrid_logistic_model.pkl
-│   ├── linear_model.pkl
-│   ├── scaler.pkl
-│   └── model.py
-│
-├── main.py
-│
-├── README.md
-│
-└── requirements.txt
-
 
