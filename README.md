@@ -31,3 +31,27 @@ Best model is automatically selected based on highest accuracy.
 
 ## 📂 Project Structure
 
+C:.
++---.idea
+|   |   .gitignore
+|   |   misc.xml
+|   |   modules.xml
+|   |   Rana Chirag.iml
+|   |   workspace.xml
+|   |
+|   \---inspectionProfiles
+|           profiles_settings.xml
+|           Project_Default.xml
+|
++---App
+|       app.py
+|
++---Dataset
+|       student_data.csv
+|
+\---Model
+        model.py
+        models.pkl
+        scaler.pkl
+        scores.pkl
+        top_models.pkl
