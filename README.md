@@ -1,4 +1,4 @@
-# 🎓 Student Result Prediction System (ML + Streamlit)
+# Student Result Prediction System (ML + Streamlit)
 
 A Machine Learning based web application that predicts student exam marks using study hours, attendance, internal marks, and assignment score.
 
@@ -6,19 +6,19 @@ The system compares multiple ML models, selects the best-performing algorithm au
 
 ---
 
-## 🚀 Features
+## Features
 
-✔ Predict student marks using trained ML models  
-✔ Compare multiple algorithms  
-✔ Automatically detect BEST performing model  
-✔ Hybrid Ensemble Prediction (Top models average)  
-✔ Attendance-based personalized feedback  
-✔ Interactive Streamlit dashboard UI  
-✔ Graph comparison of model outputs  
+- Predict student marks using trained ML models  
+- Compare multiple algorithms  
+- Automatically detect BEST performing model  
+- Hybrid Ensemble Prediction (Top models average)  
+- Attendance-based personalized feedback  
+- Interactive Streamlit dashboard UI  
+- Graph comparison of model outputs  
 
 ---
 
-## 🧠 Machine Learning Models Used
+## Machine Learning Models Used
 
 - Linear Regression  
 - Random Forest  
@@ -29,7 +29,7 @@ Best model is automatically selected based on highest accuracy.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 C:.
 +---.idea
