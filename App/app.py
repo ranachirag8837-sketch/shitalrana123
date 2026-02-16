@@ -7,6 +7,8 @@ import numpy as np
 import joblib
 import pandas as pd
 from pathlib import Path
+import subprocess
+import sys
 import matplotlib.pyplot as plt
 from streamlit.components.v1 import html
 
@@ -30,13 +32,24 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
 
 .stApp {
-    background-color: #F8FAFC;
+    background:
+        radial-gradient(circle at 20% 20%, #eef2ff 0%, rgba(238,242,255,0) 40%),
+        radial-gradient(circle at 80% 10%, #dbeafe 0%, rgba(219,234,254,0) 35%),
+        linear-gradient(135deg, #f8fafc 0%, #eef2ff 45%, #f1f5f9 100%);
     font-family: 'Inter', sans-serif;
+}
+
+.main .block-container {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 22px;
+    padding: 1.5rem 1.8rem 2.2rem 1.8rem;
+    backdrop-filter: blur(4px);
 }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background-color: #0F172A;
+    background: linear-gradient(180deg, #0F172A 0%, #111827 100%);
     border-right: 1px solid #1E293B;
 }
 
@@ -152,14 +165,56 @@ st.markdown('<div class="main-title"><h1>🎓 Student Result Prediction System</
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_DIR = BASE_DIR / "Model"
+MODEL_SCRIPT_PATH = MODEL_DIR / "model.py"
+
+
+def ensure_model_artifacts_exist():
+    required_files = [
+        MODEL_DIR / "scaler.pkl",
+        MODEL_DIR / "models.pkl",
+        MODEL_DIR / "top_models.pkl",
+        MODEL_DIR / "scores.pkl",
+    ]
+    missing_files = [str(file.name) for file in required_files if not file.exists()]
+
+    if not missing_files:
+        return
+
+    st.warning(
+        f"Missing model artifacts ({', '.join(missing_files)}). Training models automatically..."
+    )
+
+    if not MODEL_SCRIPT_PATH.exists():
+        raise FileNotFoundError(f"Training script not found: {MODEL_SCRIPT_PATH}")
+
+    result = subprocess.run(
+        [sys.executable, str(MODEL_SCRIPT_PATH)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    if result.stdout:
+        st.caption("Model training output:")
+        st.code(result.stdout)
+
+
+def load_model_artifacts():
+    ensure_model_artifacts_exist()
+    scaler_obj = joblib.load(MODEL_DIR / "scaler.pkl")
+    all_models = joblib.load(MODEL_DIR / "models.pkl")
+    top = joblib.load(MODEL_DIR / "top_models.pkl")
+    model_scores = joblib.load(MODEL_DIR / "scores.pkl")
+
+    valid_top = [name for name in top if name in all_models]
+    if not valid_top:
+        valid_top = list(all_models.keys())[:3]
+
+    return scaler_obj, all_models, valid_top, model_scores
 
 try:
-    scaler = joblib.load(MODEL_DIR / "scaler.pkl")
-    models = joblib.load(MODEL_DIR / "models.pkl")
-    top_models = joblib.load(MODEL_DIR / "top_models.pkl")
-    scores = joblib.load(MODEL_DIR / "scores.pkl")
-except:
-    st.error("❌ Model files not found!")
+    scaler, models, top_models, scores = load_model_artifacts()
+except Exception as e:
+    st.error(f"❌ Unable to load model files: {e}")
     st.stop()
 
 # ==========================================
