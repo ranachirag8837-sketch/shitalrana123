@@ -55,8 +55,11 @@ st.markdown("""
 [data-testid="stAppViewContainer"] h1,
 [data-testid="stAppViewContainer"] h2,
 [data-testid="stAppViewContainer"] h3,
-[data-testid="stAppViewContainer"] .stSubheader {
-    color: #0B132B !important;
+[data-testid="stAppViewContainer"] .stSubheader,
+[data-testid="stHeadingWithActionElements"] h2,
+[data-testid="stHeadingWithActionElements"] h3,
+[data-testid="stHeadingWithActionElements"] a {
+    color: #000000 !important;
     font-weight: 700;
 }
 
