@@ -47,6 +47,31 @@ st.markdown("""
     backdrop-filter: blur(4px);
 }
 
+/* Force readable dark text in main content */
+[data-testid="stAppViewContainer"] h1,
+[data-testid="stAppViewContainer"] h2,
+[data-testid="stAppViewContainer"] h3,
+[data-testid="stAppViewContainer"] h4,
+[data-testid="stAppViewContainer"] h5,
+[data-testid="stAppViewContainer"] h6,
+[data-testid="stAppViewContainer"] p,
+[data-testid="stAppViewContainer"] li,
+[data-testid="stAppViewContainer"] span,
+[data-testid="stAppViewContainer"] .stMarkdown,
+[data-testid="stAppViewContainer"] .stSubheader {
+    color: #0F172A !important;
+}
+
+/* Keep sidebar text light for contrast */
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] div {
+    color: #FFFFFF;
+}
+
 /* Sidebar */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0F172A 0%, #111827 100%);
