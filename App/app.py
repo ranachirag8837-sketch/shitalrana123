@@ -47,29 +47,34 @@ st.markdown("""
     backdrop-filter: blur(4px);
 }
 
-/* Force readable dark text in main content */
+/* Clean readable typography in main area */
+[data-testid="stAppViewContainer"] {
+    color: #0F172A;
+}
+
 [data-testid="stAppViewContainer"] h1,
 [data-testid="stAppViewContainer"] h2,
 [data-testid="stAppViewContainer"] h3,
-[data-testid="stAppViewContainer"] h4,
-[data-testid="stAppViewContainer"] h5,
-[data-testid="stAppViewContainer"] h6,
-[data-testid="stAppViewContainer"] p,
-[data-testid="stAppViewContainer"] li,
-[data-testid="stAppViewContainer"] span,
-[data-testid="stAppViewContainer"] .stMarkdown,
 [data-testid="stAppViewContainer"] .stSubheader {
-    color: #0F172A !important;
+    color: #0B132B !important;
+    font-weight: 700;
 }
 
-/* Keep sidebar text light for contrast */
-[data-testid="stSidebar"] h1,
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3,
-[data-testid="stSidebar"] p,
-[data-testid="stSidebar"] span,
-[data-testid="stSidebar"] div {
-    color: #FFFFFF;
+[data-testid="stAppViewContainer"] p,
+[data-testid="stAppViewContainer"] li,
+[data-testid="stAppViewContainer"] .stMarkdown,
+[data-testid="stAppViewContainer"] .stDataFrame,
+[data-testid="stAppViewContainer"] .stAlert {
+    color: #1E293B !important;
+}
+
+/* Keep sidebar typography bright for contrast */
+[data-testid="stSidebar"] {
+    color: #F8FAFC;
+}
+
+[data-testid="stSidebar"] * {
+    color: inherit;
 }
 
 /* Sidebar */
@@ -92,10 +97,10 @@ st.markdown("""
 
 /* Title */
 .main-title {
-    background-color: #BDBCB8;
+    background: linear-gradient(135deg, #D4D4D2 0%, #BDBCB8 100%);
     padding: 2.5rem;
     border-radius: 20px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 14px 28px -14px rgba(15, 23, 42, 0.35);
     border: 1px solid #E2E8F0;
     text-align: center;
     margin-bottom: 2rem;
