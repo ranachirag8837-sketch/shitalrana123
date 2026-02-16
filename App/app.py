@@ -285,3 +285,4 @@ if predict:
 
     st.subheader("📘 Personalized Attendance Feedback")
     html(generate_recommendation(attendance), height=300)
+
