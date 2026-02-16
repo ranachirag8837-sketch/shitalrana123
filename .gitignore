@@ -1,0 +1,10 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local virtual envs
+.venv/
+venv/
+
+# Model artifacts generated at runtime/training
+Model/*.pkl
