@@ -17,7 +17,7 @@ from streamlit.components.v1 import html
 # ==========================================
 
 st.set_page_config(
-    page_title="🎓 Student Result Prediction AI",
+    page_title="Student Result Prediction AI",
     layout="wide"
 )
 
@@ -32,13 +32,24 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
 
 .stApp {
-    background-color: #F8FAFC;
+    background:
+        radial-gradient(circle at 20% 20%, #eef2ff 0%, rgba(238,242,255,0) 40%),
+        radial-gradient(circle at 80% 10%, #dbeafe 0%, rgba(219,234,254,0) 35%),
+        linear-gradient(135deg, #f8fafc 0%, #eef2ff 45%, #f1f5f9 100%);
     font-family: 'Inter', sans-serif;
+}
+
+.main .block-container {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 22px;
+    padding: 1.5rem 1.8rem 2.2rem 1.8rem;
+    backdrop-filter: blur(4px);
 }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background-color: #0F172A;
+    background: linear-gradient(180deg, #0F172A 0%, #111827 100%);
     border-right: 1px solid #1E293B;
 }
 
@@ -146,7 +157,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="main-title"><h1>🎓 Student Result Prediction System</h1></div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title"><h1>Student Result Prediction System</h1></div>', unsafe_allow_html=True)
 
 # ==========================================
 # Load Models
@@ -210,7 +221,7 @@ except Exception as e:
 # Sidebar Input
 # ==========================================
 
-st.sidebar.header("📌 Enter Student Details")
+st.sidebar.header("Enter Student Details")
 
 study_hours = st.sidebar.number_input("Study Hours (0-12)", 0.0, 12.0, value=5.0)
 attendance = st.sidebar.number_input("Attendance % (0-100)", 0.0, 100.0, value=75.0)
@@ -235,7 +246,7 @@ def generate_recommendation(attendance):
             "Attend classes regularly",
             "Meet academic advisor"
         ]
-        goal = "🎯 Immediate Action Required"
+        goal = "Immediate Action Required"
 
     elif attendance < 60:
         status = "AVERAGE"
@@ -245,7 +256,7 @@ def generate_recommendation(attendance):
             "Avoid unnecessary leaves",
             "Maintain minimum 75%"
         ]
-        goal = "🎯 Goal: Reach 70+"
+        goal = "Goal: Reach 70+"
 
     elif attendance < 80:
         status = "GOOD"
@@ -255,7 +266,7 @@ def generate_recommendation(attendance):
             "Participate in activities",
             "Stay consistent"
         ]
-        goal = "🎯 Goal: Reach 85+"
+        goal = "Goal: Reach 85+"
 
     else:
         status = "EXCELLENT"
@@ -265,14 +276,14 @@ def generate_recommendation(attendance):
             "Keep up the discipline",
             "Be a role model"
         ]
-        goal = "🎯 Goal: Maintain 100%"
+        goal = "Goal: Maintain 100%"
 
     return f"""<div class="custom-recommend">
     <div class="status-title" style="color:{color};">
-    ⭐ Status: {status}
+    Status: {status}
     </div>
 
-    <div class="suggest-title">📌 Suggestions</div>
+    <div class="suggest-title">Suggestions</div>
 
     <ul>
     {''.join(f"<li>{item}</li>" for item in suggestions)}
@@ -292,7 +303,7 @@ if predict:
     input_data = np.array([[study_hours, attendance, internal, assignment]])
     input_scaled = scaler.transform(input_data)
 
-    st.subheader("📊 Individual Model Predictions")
+    st.subheader("Individual Model Predictions")
 
     results_data = []
     for name, model in models.items():
@@ -311,7 +322,7 @@ if predict:
     hybrid_final = np.clip(hybrid_final, 0, 100)
     hybrid_final = round(hybrid_final, 2)
 
-    st.subheader("🤖 Hybrid Model Prediction (Top 3 Ensemble)")
+    st.subheader("Hybrid Model Prediction (Top 3 Ensemble)")
     st.markdown(f"""
     <div class="result-box">
         <p style="color: #64748B; font-weight: 600;">Average Hybrid Score</p>
@@ -319,7 +330,7 @@ if predict:
     </div>
     """, unsafe_allow_html=True)
 
-    st.subheader("📈 Algorithm Score Comparison")
+    st.subheader("Algorithm Score Comparison")
 
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.bar(df_results["Model"], df_results["Predicted Marks"])
@@ -327,6 +338,6 @@ if predict:
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
-    st.subheader("📘 Personalized Attendance Feedback")
+    st.subheader("Personalized Attendance Feedback")
     html(generate_recommendation(attendance), height=300)
 
